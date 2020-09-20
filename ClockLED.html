@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+       .ledback{
+           background:url("./imags/LED.png")  0px  0px no-repeat;
+           background-size:100% 100%;
+           width:740px;
+           height:300px;
+           margin:auto;
+       }
+       .top1{
+           width:100%;
+           height:15%;
+           /*background-color: red;*/
+           /*opacity:0.6;*/
+       }
+       .timediv{
+           width:100%;
+           height:38%;
+           /*background-color: green;*/
+           /*opacity:0.6;*/
+           text-align:center;
+       }
+       .timenum{
+         width:50px;
+         height:100px;
+         background: url("./imags/countdown8.png") -37px 0px no-repeat;
+
+
+       }
+       .timediv>div{
+         display:inline-block;
+         transform:skewX(-10deg);
+       }
+       .timediv>div:nth-of-type(3),.timediv>div:nth-of-type(6){
+           width:20px;
+           height:100px;
+           background: url("./imags/dot.png") -52px 0px no-repeat;
+       }
+       .datediv{
+           width:100%;
+           height:36%;
+           /*background-color: blue;*/
+           /*opacity:0.6;*/
+           text-align: center;;
+       }
+       .datediv>div{
+           display:inline-block;
+           transform:skewX(-10deg);
+           font-size: 50px;
+           vertical-align: middle;
+           color:white;
+       }
+       .datenum{
+         width:39px;
+         height:73px;
+         background: url("./imags/countdown8.png") -27px -13px no-repeat;
+         background-size: 250% 136%;
+       }
+    </style>
+    <script src="./js/jquery-3.4.1.slim.min.js"></script>
+    <script src="./js/JqueryRotate.js"></script>
+    <script type="text/javascript">
+//        $(document).ready(function(){})
+        //文档准备好以后的操作
+        $(function(){
+
+        })
+        function change2img(timeVal,className,idx0,idx1){
+            var val0=timeVal%10;
+            var val1=Math.floor(timeVal/10);
+            //设置个位的图片
+            $(className).eq(idx0).css({
+                "background-image":'url("./imags/countdown'+val0+'.png")'
+            });
+            //设置十位的图片
+            $(className).eq(idx1).css({
+                "background-image":'url("./imags/countdown'+val1+'.png")'
+            });
+        }
+
+
+
+
+
+
+
+        function change(){
+            //拿到当前时间
+            var now=new Date();
+            //拿到秒
+            change2img(now.getSeconds(),".timenum",5,4);
+//            var second=now.getSeconds();
+//            var sec0=second%10;
+//            var sec1=Math.floor(second/10);
+//            //设置秒的图片
+//            $(".timenum").eq(5).css({
+//                "background-image":'url("./imags/countdown'+sec0+'.png")'
+//            });
+//            $(".timenum").eq(4).css({
+//                "background-image":'url("./imags/countdown'+sec1+'.png")'
+//            });
+            //拿到分钟
+            change2img(now.getMinutes(),".timenum",3,2);
+//            var minute=now.getMinutes();
+//            var min0=minute%10;
+//            var min1=Math.floor(minute/10);
+//            //设置分钟图片
+//            $(".timenum").eq(3).css({
+//                "background-image":'url("./imags/countdown'+min0+'.png")'
+//            });
+//            $(".timenum").eq(2).css({
+//                "background-image":'url("./imags/countdown'+min1+'.png")'
+//            });
+            //拿到时钟
+            change2img(now.getHours(),".timenum",1,0);
+//            var hour=now.getHours();
+//            var hour0=hour%10;
+//            var hour1=Math.floor(hour/10);
+//            //设置时钟图片
+//            $(".timenum").eq(1).css({
+//                "background-image":'url("./imags/countdown'+hour0+'.png")'
+//            });
+//            $(".timenum").eq(0).css({
+//                "background-image":'url("./imags/countdown'+hour1+'.png")'
+//            });
+          //设置日期
+            //拿到月份
+            change2img(now.getMonth()+1,".datenum",5,4);
+//            var week=now.getDay();
+//            var week0=week%10;
+//            //设置星期
+             var val0=now.getDay();
+            if(val0==0){
+                val0=7;
+            }
+            $(".datenum").eq(8).css({
+                "background-image":'url("./imags/countdown'+val0+'.png")'
+            });
+
+
+//            $(".datenum").eq(8).css({
+//                "background-image":'url("./imags/countdown'+week0+'.png")'
+//            });
+
+
+            //设置日期
+            //拿到天数
+            change2img(now.getDate(),".datenum",7,6);
+//            var day=now.getDate();
+//            var day0=day%10;
+//            var day1=Math.floor(day/10);
+//            //设置星期
+//            $(".datenum").eq(7).css({
+//                "background-image":'url("./imags/countdown'+day0+'.png")'
+//            });
+//            $(".datenum").eq(6).css({
+//                "background-image":'url("./imags/countdown'+day1+'.png")'
+//            });
+            //设置日期
+            //拿到月数
+//            var month=now.getMonth();
+//            var month0=month%10;
+//            var month1=Math.floor(month/10);
+//            //设置星期
+//            $(".datenum").eq(5).css({
+//                "background-image":'url("./imags/countdown'+month0+'.png")'
+//            });
+//            $(".datenum").eq(4).css({
+//                "background-image":'url("./imags/countdown'+month1+'.png")'
+//            });
+            //设置年份
+            var year=now.getFullYear();
+            var year0=year%10;
+            $(".datenum").eq(3).css({
+              "background-image":'url("./imags/countdown'+year0+'.png")'
+            });
+            var year1=Math.floor((year/10)%10);
+            $(".datenum").eq(2).css({
+                "background-image":'url("./imags/countdown'+year1+'.png")'
+            });
+            var year2=Math.floor((year/100)%10);
+            $(".datenum").eq(1).css({
+                "background-image":'url("./imags/countdown'+year2+'.png")'
+            });
+            var year3=Math.floor(year/1000);
+            $(".datenum").eq(0).css({
+                "background-image":'url("./imags/countdown'+year3+'.png")'
+            });
+
+//            var year=now.getYear();
+//            var year0=month%10;
+//            var year1=Math.floor((year/10)%10);
+//            var year2=Math.floor((year/100)%10);
+//            var year3=Math.floor(year/1000);
+//            //设置星期
+//            $(".datenum").eq(3).css({
+//                "background-image":'url("./imags/countdown'+year0+'.png")'
+//            });
+//            $(".datenum").eq(2).css({
+//                "background-image":'url("./imags/countdown'+year1+'.png")'
+//            });
+//            $(".datenum").eq(1).css({
+//                "background-image":'url("./imags/countdown'+year2+'.png")'
+//            });
+//            $(".datenum").eq(0).css({
+//                "background-image":'url("./imags/countdown'+year3+'.png")'
+//            });
+
+
+
+        }
+       setInterval("change()",1000);
+
+    </script>
+</head>
+<body>
+<div class="ledback">
+    <div class="top1"></div>
+       <div class="timediv">
+           <div class="timenum"></div>
+           <div class="timenum"></div>
+           <div></div>
+           <div class="timenum"></div>
+           <div class="timenum"></div>
+           <div></div>
+           <div class="timenum"></div>
+           <div class="timenum"></div>
+       </div>
+    <!--xxxx年xx月xx日星期布局-->
+    <div class="datediv">
+        <div class="datenum"></div>
+        <div class="datenum"></div>
+        <div class="datenum"></div>
+        <div class="datenum"></div>
+        <div class="">年</div>
+        <div class="datenum"></div>
+        <div class="datenum"></div>
+        <div class="">月</div>
+        <div class="datenum"></div>
+        <div class="datenum"></div>
+        <div class="">日</div>
+        <div class="">星期</div>
+        <div class="datenum"></div>
+    </div>
+</div>
+</body>
+</html>

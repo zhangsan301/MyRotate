@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/ClockRotate.css"/>
+    <script src="./js/jquery-3.4.1.slim.min.js"></script>
+    <script src="./js/JqueryRotate.js"></script>
+
+    <script type="text/javascript">
+        var secDegree=0;
+        var minuteDeg=0;
+        var hourDeg=0;
+        var playing=false;
+        $(function(){
+            var now=new Date();
+            var sec=now.getSeconds();
+            secDegree=sec*6;
+
+            var min=now.getMinutes();
+            minuteDeg=min*(0.1*60);
+
+            var hour=now.getHours();
+            hourDeg=(hour+min/60)*30;
+            $("#btnSound").click(function(){
+                playing = !playing;
+                if(playing == true){
+                    $(this).removeClass("muteBack")
+                    $(this).addClass("soundBack")
+                }
+                else{
+                    $(this).removeClass("soundBack")
+                    $(this).addClass("muteBack")
+                }
+            })
+        })
+        function clockRotate(){
+            if(playing==true){
+                $("audio")[0].volume=0.02;
+                $("audio")[0].play();
+            }
+            secDegree+=6;
+            $(".second").rotate({
+                        angle: secDegree,
+                        center:[13,274]
+                    }
+            );
+
+            //分针的旋转
+            minuteDeg+= 0.1;
+            $(".minute").rotate({
+                angle:minuteDeg,
+                center:[11,273]
+            });
+
+//         hourDeg+=360/(12*3600);
+            hourDeg+=0.008333;
+            $(".hour").rotate({
+                angle:hourDeg,
+                center:[11,273]
+            });
+        }
+        //启动定时器，定时调用
+        setInterval("clockRotate()",1000);
+    </script>
+    <style>
+        *{margin:0px;padding:0px;}
+        .main{
+            background: url("./imags/gouwu.jpg") 0px 0px no-repeat;
+            background-size: 100% 100%;
+            width:1000px;
+            height:4500px;
+            margin:auto;
+            position: relative;
+        }
+        .plane2{
+          background:url("./imags/plane2.jpg") 0px 0px no-repeat;
+          background-size: 100% 100%;
+          width:571px;
+          height:520px;
+            position: absolute;
+          top:200px;
+            right:-336px;
+          z-index:-10;
+        }
+    </style>
+
+</head>
+<body>
+<div class="main">
+ <div class="plane2">
+     <div id="clock">
+         <div class="hour"></div>
+         <div class="minute"></div>
+         <div class="second">
+             <div class="secHead"></div>
+         </div>
+         <div id="btnSound" class="muteBack" style="display: none"></div>
+     </div>
+ </div>
+</div>
+</body>
+</html>
